@@ -11,6 +11,7 @@
 
 </div>
 
+🎉 CuriousVLA has been recommanded to CVPR'26 Findings.
 
 ## TODOs
 
