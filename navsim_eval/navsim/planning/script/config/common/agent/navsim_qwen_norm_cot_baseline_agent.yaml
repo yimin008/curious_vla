@@ -1,0 +1,14 @@
+_target_: navsim.agents.curious_vla.navsim_qwen_norm_agent_cot.NavsimCoTQwenAgent
+_convert_: 'all'
+
+config:
+  _target_: navsim.agents.curious_vla.curious_vla_config.CuriousVlaConfig
+  _convert_: 'all'
+  model_name_or_path: ''
+  log_path: ${output_dir}
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: 'all'
+  time_horizon: 4
+  interval_length: 0.5

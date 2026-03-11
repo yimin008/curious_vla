@@ -1,0 +1,15 @@
+export NUPLAN_MAP_VERSION="nuplan-maps-v1.0"
+export NAVSIM_DEVKIT_ROOT="ABS_PATH_TO_NAVSIM_EVAL"
+export OPENSCENE_DATA_ROOT="ABS_PATH_TO_OPENSCENE_DATA"
+export NAVSIM_EXP_ROOT="EXP_ROOT_PATH"
+export NUPLAN_MAPS_ROOT="ABS_PATH_TO_NUPLAN_MAPS"
+CACHE_PATH="YOUR_PATH_TO_METRIC_CACHE"
+
+TRAIN_TEST_SPLIT=navtest
+# TRAIN_TEST_SPLIT=navtrain
+CACHE_PATH=$NAVSIM_EXP_ROOT/metric_cache_navtest
+# CACHE_PATH=$NAVSIM_EXP_ROOT/metric_cache_navtrain
+
+python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_metric_caching.py \
+train_test_split=$TRAIN_TEST_SPLIT \
+metric_cache_path=$CACHE_PATH
