@@ -17,12 +17,17 @@
 
 - [x] Paper release
 - [x] Model weights on HuggingFace
-- [ ] Prompt Construction and Evaluation code
+- [x] Prompt Construction and Evaluation code
 - [ ] Training data (IL stage)
-- [ ] Training code (RL stage: reward function api server + SDR)
+- [ ] Training code (RL stage: Basic reward function api server + SDR)
 - [ ] Training code (RL stage: ADAS)
 
-All will be released before late March, 2026.
+Above will be released before late March, 2026.
+
+- [ ] Whole Data Engine
+- [ ] Lightning-fast reward function api server, and faster evaluation
+
+Above will be released future.
 
 ## Overview
 
@@ -61,19 +66,14 @@ Performance on the **Navsim** benchmark:
 
 > We are finalizing the codebase for public release. As the project involves multiple frameworks, we are carefully organizing the repository to ensure it is easy to use. The source code (training & evaluation) will be available by **late March 2026**.
 
-<!-- ### Installation
-
-```bash
-git clone https://github.com/xxx/Curious-VLA.git
-cd Curious-VLA
-pip install -r requirements.txt
-```
 
 ### Evaluation
 
-```bash
-# TODO
-```
+You need to prepare **2 python venv**: `lf`(Llamafactory for deploy, py3.11), `navsim`(for evaluation, py3.9)
+
+Details and Commands See[docs/deploy.md](docs/deploy.md)
+
+<!-- 
 
 ### Training
 
@@ -99,7 +99,7 @@ If you find this work useful, please consider citing:
 
 ## Acknowledgements
 
-This project is built upon [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) and [Navsim](https://github.com/autonomousvision/navsim). We thank the open-source community for their contributions.
+This project is built upon [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL), [Navsim](https://github.com/autonomousvision/navsim), [EasyR1](https://github.com/hiyouga/EasyR1.git), [VeRL](https://github.com/verl-project/verl.git). Code for Navsim Agent is inspired by [ReCogDrive](https://github.com/xiaomi-research/recogdrive.git). We thank the open-source community for their contributions.
 
 ## License
 
