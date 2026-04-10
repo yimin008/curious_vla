@@ -30,6 +30,8 @@ Most will be released before late March, 2026.
 
 For obvious reasons about a certain confernce, our recent schedule has been significantly affected 🤷, and the remaining components will be fully released by April 10.
 
+[4.10 Update]: (Uploading...) Data & Model in IL stage will be uploaded in https://huggingface.co/MashiroLn/Curious-VLA-dev.
+
 - [ ] Whole Data Engine
 - [ ] Lightning-fast(15x throughput) reward function api server, and faster evaluation
 
