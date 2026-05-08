@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate curious
+source .venvs/curious/bin/activate
 
 : "${model_name_or_path:="YOUR_MODEL_PATH"}"
 : "${template:=qwen3_vl}"
@@ -53,7 +52,7 @@ for i in $(seq 0 $((num_instances-1))); do
   echo "Start Instance $i: Use Devices: $devices, Port: $port"
 
   CUDA_VISIBLE_DEVICES=$devices \
-  vllm serve $model_name_or_path \
+  uv run vllm serve $model_name_or_path \
     --limit-mm-per-prompt.video 0 \
     --mm-processor-kwargs "${mm_processor_kwargs}" \
     --trust-remote-code \

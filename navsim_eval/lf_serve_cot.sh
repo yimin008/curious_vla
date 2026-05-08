@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate curious
+source .venvs/curious/bin/activate
 
 if ! command -v llamafactory-cli >/dev/null 2>&1; then
   echo "Error: 'llamafactory-cli' was not found in the 'curious' env."
@@ -58,7 +57,7 @@ for i in $(seq 0 $((num_instances-1))); do
 
   CUDA_VISIBLE_DEVICES=$devices API_VERBOSE=0 \
   API_PORT=$port \
-  llamafactory-cli api \
+  uv run llamafactory-cli api \
     --model_name_or_path $model_name_or_path \
     --template $template \
     --infer_backend vllm \

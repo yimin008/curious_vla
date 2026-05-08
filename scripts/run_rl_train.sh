@@ -42,13 +42,11 @@ if [[ ! -d "$CACHE_PATH" ]]; then
     exit 1
 fi
 
-source "$(conda info --base)/etc/profile.d/conda.sh"
 trap 'tmux kill-session -t "$SESSION_NAME" 2>/dev/null || true' EXIT
 
 tmux new-session -d -s "$SESSION_NAME" \
     "bash -c '
-        source \"$(conda info --base)/etc/profile.d/conda.sh\"
-        conda activate navsim
+        source \"$PROJECT_ROOT/.venvs/navsim/bin/activate\"
         export PROJECT_ROOT=\"$PROJECT_ROOT\"
         export DATA_ROOT=\"$DATA_ROOT\"
         export REWARD_SERVER_PORT=$REWARD_SERVER_PORT
@@ -72,13 +70,13 @@ lsof -i :"$REWARD_SERVER_PORT" >/dev/null 2>&1 || {
 }
 sleep 5
 
-conda activate curious
+source "$PROJECT_ROOT/.venvs/curious/bin/activate"
 cd "$EASYR1_ROOT"
 
 export EXP_NAME NAVSIM_STAT_PATH="$STATS_PATH"
 export NAVSIM_TRAJ_PARSER_FUNC=verl.utils.reward_score.navsim.helper:parse_trajectory_string_after_tag
 
-python3 -m verl.trainer.main \
+uv run python -m verl.trainer.main \
     config=examples/config_vla.yaml \
     data.train_files="${DATA_PATH}@train" \
     data.val_files="${DATA_PATH}@test" \

@@ -10,7 +10,7 @@ export NUPLAN_MAPS_ROOT="$DATA_ROOT/maps"
 CACHE_PATH=$NAVSIM_EXP_ROOT/metric_cache_navtest
 TRAIN_TEST_SPLIT=navtest
 
-python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
+uv run python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
 train_test_split=$TRAIN_TEST_SPLIT \
 agent=human_agent \
 experiment_name=human_agent \

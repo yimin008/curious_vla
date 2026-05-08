@@ -39,13 +39,11 @@ if [[ ! -d "$CACHE_PATH" ]]; then
     exit 1
 fi
 
-source "$(conda info --base)/etc/profile.d/conda.sh"
 trap 'tmux kill-session -t "$SESSION_NAME" 2>/dev/null || true' EXIT
 
 tmux new-session -d -s "$SESSION_NAME" \
     "bash -c '
-        source \"$(conda info --base)/etc/profile.d/conda.sh\"
-        conda activate navsim
+        source \"$PROJECT_ROOT/.venvs/navsim/bin/activate\"
         export PROJECT_ROOT=\"$PROJECT_ROOT\"
         export DATA_ROOT=\"$DATA_ROOT\"
         export REWARD_SERVER_PORT=$REWARD_SERVER_PORT
@@ -69,13 +67,13 @@ lsof -i :"$REWARD_SERVER_PORT" >/dev/null 2>&1 || {
 }
 sleep 5
 
-conda activate curious
+source "$PROJECT_ROOT/.venvs/curious/bin/activate"
 cd "$EASYR1_ROOT"
 
 export EXP_NAME NAVSIM_STAT_PATH="$STATS_PATH"
 export NAVSIM_TRAJ_PARSER_FUNC=verl.utils.reward_score.navsim.helper:parse_trajectory_string_after_tag
 
-python -m verl.trainer.main_adas \
+uv run python -m verl.trainer.main_adas \
     config=examples/config_vla.yaml \
     data.train_files="${DATA_PATH}@train" \
     data.val_files="${DATA_PATH}@test" \
@@ -92,6 +90,6 @@ python -m verl.trainer.main_adas \
     ${RESUME_FROM:+trainer.load_checkpoint_path=$RESUME_FROM}
 
 cd "$EASYR1_ROOT/scripts/adas"
-python pipeline.py --infer_folder "$INFER_FOLDER" -p 0.1 --conf 0.1 --group_size 32
+uv run python pipeline.py --infer_folder "$INFER_FOLDER" -p 0.1 --conf 0.1 --group_size 32
 
 echo "Filter output: $FILTER_OUTPUT"

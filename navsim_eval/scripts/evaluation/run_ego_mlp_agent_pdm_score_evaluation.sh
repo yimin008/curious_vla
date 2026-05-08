@@ -11,7 +11,7 @@ CACHE_PATH=$NAVSIM_EXP_ROOT/metric_cache_navtest
 TRAIN_TEST_SPLIT=navtest
 CHECKPOINT=$NAVSIM_EXP_ROOT/checkpoints/ego_status_mlp_seed_0.ckpt
 
-python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
+uv run python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
 train_test_split=$TRAIN_TEST_SPLIT \
 agent=ego_status_mlp_agent \
 agent.checkpoint_path=$CHECKPOINT \

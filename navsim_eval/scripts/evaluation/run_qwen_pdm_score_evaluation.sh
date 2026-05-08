@@ -21,8 +21,7 @@ if [[ ! -d "$CACHE_PATH" ]]; then
     exit 1
 fi
 
-source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate navsim
+source "$PROJECT_ROOT/.venvs/navsim/bin/activate"
 
 export NUPLAN_MAP_VERSION="nuplan-maps-v1.0"
 export NAVSIM_DEVKIT_ROOT="$NAVSIM_DEVKIT_ROOT"
@@ -31,7 +30,7 @@ export NAVSIM_EXP_ROOT="$PROJECT_ROOT/exp_root"
 export NUPLAN_MAPS_ROOT="$DATA_ROOT/maps"
 export STATS_PATH="$PROJECT_ROOT/stats/trajectory_stats_train.json"
 
-python "$NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py" \
+uv run python "$NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py" \
     train_test_split="$TRAIN_TEST_SPLIT" \
     experiment_name="$EXPERIMENT_NAME" \
     agent="$AGENT_NAME" \

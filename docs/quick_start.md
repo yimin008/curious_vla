@@ -2,7 +2,7 @@
 
 ## Environment Setup
 
-Curious-VLA uses **2 conda environments**:
+Curious-VLA uses **2 uv virtual environments**:
 
 | Environment | Purpose |
 |:---:|:---|
@@ -13,14 +13,14 @@ Curious-VLA uses **2 conda environments**:
 bash scripts/setup_env.sh
 ```
 
-`scripts/setup_env.sh` installs the in-repo `EasyR1` package, clones LLaMA-Factory into `LLaMA-Factory/`, installs it into the same `curious` env, and creates the `navsim` eval env.
+`scripts/setup_env.sh` creates `.venvs/curious` and `.venvs/navsim`, installs the in-repo `EasyR1` package, clones LLaMA-Factory into `LLaMA-Factory/`, installs `llamafactory==0.9.3` into `curious` for Python 3.10 compatibility, and installs `navsim_eval` into `navsim`. The script uses `http://mirrors.tencentyun.com/pypi/simple` as the package index.
 
 (Required system tools for the entry scripts: `git`, `tmux`, `lsof`)
 
 (Optional) Flash Attention:
 
 ```bash
-conda activate curious && pip install flash-attn --no-build-isolation
+uv pip install --python .venvs/curious/bin/python --index-url http://mirrors.tencentyun.com/pypi/simple flash-attn --no-build-isolation
 ```
 
 ---

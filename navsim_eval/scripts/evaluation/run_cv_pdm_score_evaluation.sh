@@ -14,7 +14,7 @@ SYNTHETIC_SCENES_PATH=$OPENSCENE_DATA_ROOT/navhard_two_stage/synthetic_scene_pic
 
 TRAIN_TEST_SPLIT=navtest
 
-python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
+uv run python $NAVSIM_DEVKIT_ROOT/navsim/planning/script/run_pdm_score_one_stage.py \
 train_test_split=$TRAIN_TEST_SPLIT \
 experiment_name=cv_navtest \
 metric_cache_path=$CACHE_PATH \

@@ -33,6 +33,12 @@ if [ ! -d "$CACHE_PATH" ]; then
     echo "Set TRAIN_TEST_SPLIT=\"$TRAIN_TEST_SPLIT\" in navsim_eval/scripts/evaluation/run_metric_caching.sh, then run that script first."
     exit 1
 fi
+if ! ls "$CACHE_PATH"/metadata/*.csv >/dev/null 2>&1; then
+    echo "Error: metric cache metadata csv not found under: $CACHE_PATH/metadata"
+    echo "Your cache directory exists but appears incomplete."
+    echo "Please rerun: bash navsim_eval/scripts/evaluation/run_metric_caching.sh"
+    exit 1
+fi
 
 # ========== 构建端口列表 ==========
 ports=()
@@ -92,7 +98,7 @@ sleep "$WARMUP_SLEEP"
 # ========== 执行评估 ==========
 echo "[eval] Running evaluation ..."
 
-python "$NAVSIM_ROOT/navsim/planning/script/run_pdm_score_one_stage.py" \
+uv run python "$NAVSIM_ROOT/navsim/planning/script/run_pdm_score_one_stage.py" \
     train_test_split="$TRAIN_TEST_SPLIT" \
     experiment_name="$EXPERIMENT_NAME" \
     agent="$AGENT_NAME" \
